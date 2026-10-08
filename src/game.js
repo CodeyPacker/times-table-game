@@ -14,3 +14,17 @@ export function swipeDirection(x, y, mode) {
 export function remainingSeconds(deadline, now = Date.now()) {
   return deadline === null ? null : Math.max(0, Math.ceil((deadline - now) / 1000));
 }
+
+export function knowledgeQuestions(min, max, randomized = false, random = Math.random) {
+  const questions = [];
+  for (let a = min; a <= max; a++) {
+    for (let b = a; b <= max; b++) questions.push({ a, b });
+  }
+  if (randomized) {
+    for (let i = questions.length - 1; i > 0; i--) {
+      const j = Math.floor(random() * (i + 1));
+      [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
+  }
+  return questions;
+}
